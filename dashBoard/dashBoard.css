@@ -1,0 +1,230 @@
+/* Dashboard Page CSS */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #ebeef3;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: white;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #dcdcdc;
+  margin: 18px;
+  border-radius: 12px;
+}
+
+.brand { font-weight:700; font-size:20px; margin-bottom:6px; }
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: auto;
+}
+
+.menu-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  color: #333;
+}
+
+.menu-item.active,
+.menu-item:hover {
+  background: #e6ecff;
+  color: #0033cc;
+}
+
+.admin-profile {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Main Area */
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.topbar h2 {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.search {
+  padding: 10px 15px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  position: relative;
+  margin-right: 2px;
+}
+.search-img{
+  width: 20px;
+  height: 20px;
+  border-radius: 8px;
+  vertical-align: middle;
+  position: absolute;
+  opacity: 1.2;
+  margin-top: 10pxpx;
+  margin-left: 69rem;
+}
+
+/* Stats Row */
+.stats-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  flex: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.stat-box h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.stat-box .value {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-box .label {
+  font-size: 13px;
+  color: #666;
+}
+
+.stat-box.highlight {
+  background: #0033cc;
+  color: white;
+}
+
+/* Panels */
+.panel-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.panel {
+  background: white;
+  flex: 1;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.panel-header h3 {
+  font-size: 17px;
+}
+
+.panel-header button {
+  padding: 5px 12px;
+  border: 1px solid #0033cc;
+  background: white;
+  color: #0033cc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.list .item {
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.item button {
+  padding: 6px 10px;
+  background: #0033cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+}
+
+.list.empty {
+  height: 120px;
+  background: #f7f7f7;
+  border-radius: 10px;
+}
+
+/* Tourism Section */
+.tourist-panel .spot {
+  background: #e6ecff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+/* Admin image icon */
+.admin-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  vertical-align: middle;
+  background-color: #ffffff;
+}
+
+/* Tourist spot images */
+.spot-img {
+  width: 60px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Align spot items properly */
+.spot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

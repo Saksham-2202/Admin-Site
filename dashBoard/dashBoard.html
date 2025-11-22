@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bus Sathi Admin | Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">LOC🅱️BUS</div>
+      <nav class="menu">
+  <a class="menu-item" href="dashBoard.html">Dashboard</a>
+  <a class="menu-item" href="live-map.html">Live Map</a>
+  <a class="menu-item" href="../fleet/fleet.html">Fleet Management</a>
+  <a class="menu-item" href="staff.html">Staff Management</a>
+  <a class="menu-item" href="../broadCaste/broadCasts.html">Broadcasts</a>
+  <a class="menu-item" href="notifications.html">Notifications</a>
+  <a class="menu-item" href="../help desk/helpDesk.html">Help Desk</a>
+  <a class="menu-item" href="settings.html">Settings</a>
+</nav>
+
+      <!-- UPDATED: Admin image added -->
+      <div class="admin-profile">
+        <img src="admin img.png" class="admin-icon" />
+        ADMIN_33
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h2>Dashboard</h2>
+     
+        <img src="search_icon.png" class="search-img" /> 
+        <input type="text" class="search" placeholder="Search your destination" />
+         
+      </header>
+      
+      <section class="stats-row">
+        <div class="stat-box">
+          <h3>Active Fleet</h3>
+          <p class="value">52 <span>/60</span></p>
+          <p class="label">Buses Running</p>
+        </div>
+        <div class="stat-box">
+          <h3>On-Time Buses</h3>
+          <p class="value">95%</p>
+          <p class="label">On Time</p>
+        </div>
+        <div class="stat-box highlight">
+          <h3>New Complaints</h3>
+          <p class="value">14</p>
+          <p class="label">Unresolved Complaints</p>
+        </div>
+        <div class="stat-box">
+          <h3>SOS</h3>
+          <p class="value">0</p>
+          <p class="label">Active Emergencies</p>
+        </div>
+      </section>
+
+      <section class="panel-row">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Pending Approvals</h3>
+            <button>Check All</button>
+          </div>
+          <div class="list">
+            <div class="item">
+              <p>Conductor Jaspreet Singh added stop</p>
+              <small>[Bus No. PB 07 XXXX]</small>
+              <button>More Info</button>
+            </div>
+            <div class="item">
+              <p>Conductor Raju modified new stop</p>
+              <small>[Bus No. PB 29 XXXX]</small>
+              <button>More Info</button>
+            </div>
+            <div class="item">
+              <p>New Staff member: Daksh Bhadwa</p>
+              <small>[Bus No. PB 10 XXXX]</small>
+              <button>More Info</button>
+            </div>
+            <div class="item">
+              <p>New Staff member: Harsh Tempo</p>
+              <small>[Bus No. PB 19 XXXX]</small>
+              <button>More Info</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Critical Alerts</h3>
+            <button>Check All</button>
+          </div>
+          <div class="list empty"></div>
+        </div>
+      </section>
+
+      <section class="panel tourist-panel">
+        <div class="panel-header">
+          <h3>Tourism & Engagement</h3>
+          <button>Check All</button>
+        </div>
+
+        <div class="tourist-list">
+          <h4>Trending Tourist Spot</h4>
+
+          <!-- UPDATED: Images added for each tourist spot -->
+          <div class="spot">
+            Golden Temple, Amritsar <span>#1</span>
+            <img src="golden temple.jpeg" class="spot-img" />
+          </div>
+
+          <div class="spot">
+            Wagah Border, Amritsar <span>#2</span>
+            <img src="wagah border.jpeg" class="spot-img" />
+          </div>
+
+          <div class="spot">
+            Moga, Punjab <span>#3</span>
+            <img src="moga.jpeg" class="spot-img" />
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
