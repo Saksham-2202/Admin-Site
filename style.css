@@ -212,6 +212,8 @@ body {
   background-color: #ffffff;
 }
 
+.menu-item.active { background:#0b58d0; color:#fff; }
+
 /* Tourist spot images */
 .spot-img {
   width: 60px;
