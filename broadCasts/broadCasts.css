@@ -8,24 +8,61 @@ body { background:#f6f8fb; color:#111; }
 .layout { display:flex; min-height:100vh; }
 
 /* sidebar (same look as other pages) */
+/* Sidebar */
 .sidebar {
-  width: 220px;
-  background: #fff;
-  color: #111;
-  padding: 22px 14px;
-  display:flex; flex-direction:column; gap:12px;
-  border-right: 1px solid #eef2f7;
+  width: 240px;
+  background: white;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #dcdcdc;
+  margin: 18px;
+  border-radius: 12px;
 }
-.brand { font-weight:800; font-size:18px; color:#0b3a66; margin-bottom:6px; }
-.menu { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
-.menu-item { color:#374151; padding:10px 12px; border-radius:8px; text-decoration:none; display:block; }
-.menu-item:hover { background:#f1f5f9; color:#0b58d0; }
-.menu-item.active { background:#0b58d0; color:#fff; }
 
-/* admin profile */
-.admin-profile { margin-top:auto; display:flex; align-items:center; gap:10px; background:#fff; padding:8px 10px; border-radius:8px; border:1px solid #eef2f7; }
-.admin-icon { width:36px; height:36px; border-radius:50%; object-fit:cover; }
-.admin-name { color:#111; }
+.brand { font-weight:700; font-size:20px; margin-bottom:6px; }
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: auto;
+}
+
+.menu-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  color: #333;
+}
+
+.menu-item.active,
+.menu-item:hover {
+  background: #e6ecff;
+  color: #0033cc;
+}
+
+.admin-profile {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.admin-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  vertical-align: middle;
+  background-color: #ffffff;
+}
+
 
 /* main area */
 .main { flex:1; padding:20px 28px; }
@@ -39,7 +76,7 @@ body { background:#f6f8fb; color:#111; }
 
 /* tabs */
 .tabs { display:flex; gap:12px; margin-bottom:12px; }
-.tab { background:transparent; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; color:#6b7280; }
+.tab { background:transparent; border:none; padding:8px 12px; border-radius:8px; font-size: 15px; cursor:pointer; color:#6b7280; text-decoration: none; }
 .tab.active { background:#eef6ff; color:#0b58d0; border:1px solid #e6f0ff; }
 
 /* content card */

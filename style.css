@@ -87,7 +87,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 20px;
   position: relative;
-  margin-right: 2px;
+  margin-right: -57rem;
 }
 .search-img{
   width: 20px;
@@ -97,7 +97,7 @@ body {
   position: absolute;
   opacity: 1.2;
   margin-top: 10pxpx;
-  margin-left: 69rem;
+  margin-left: 64rem;
 }
 
 /* Stats Row */

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bus Sathi | Admin Login</title>
+  <link rel="stylesheet" href="./login.css" />
+  <!-- Firebase v9 CDN (modular) -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <div class="login-layout">
+    <aside class="login-side">
+      <div class="brand">
+        <div class="brand-text">LOC🅱️BUS</div>
+      </div>
+      <p class="lead">Admin Panel</p>
+      <p class="sub">Sign in to manage fleet, broadcasts, help desk and more.</p>
+    </aside>
+
+    <main class="login-main">
+      <div class="card login-card">
+        <h2>Admin Sign In</h2>
+
+        <div class="form-row">
+          <label>Email</label>
+          <input id="email" type="email" class="input" placeholder="admin@example.com" />
+        </div>
+
+        <div class="form-row">
+          <label>Password</label>
+          <input id="password" type="password" class="input" placeholder="Your password" />
+        </div>
+
+        <div class="form-row small muted" id="errMsg" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button id="loginBtn" class="btn-primary">Sign in</button>
+          <a href="/Admin-Site/index.html" class="btn-ghost">Back</a>
+        </div>
+
+        <div class="hint">Use your admin credentials. For demo mode this page uses client-side Firebase auth.</div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./login.js"></script>
+</body>
+</html>
