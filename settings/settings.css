@@ -6,7 +6,7 @@ body { background:#f6f8fb; color:#0f1724; -webkit-font-smoothing:antialiased; }
 
 /* layout */
 .layout { display:flex; min-height:100vh; }
-
+/* Sidebar */
 .sidebar {
   width: 240px;
   background: white;
@@ -17,8 +17,8 @@ body { background:#f6f8fb; color:#0f1724; -webkit-font-smoothing:antialiased; }
   margin: 18px;
   border-radius: 12px;
 }
-.brand { font-weight:800; font-size:18px; color:#0b3a66; }
-.brand .b { background:#fde68a; padding:2px 6px; border-radius:4px; margin-left:6px; }
+
+.brand { font-weight:700; font-size:20px; margin-bottom:6px; }
 
 .menu {
   display: flex;
@@ -41,10 +41,15 @@ body { background:#f6f8fb; color:#0f1724; -webkit-font-smoothing:antialiased; }
   background: #e6ecff;
   color: #0033cc;
 }
-.menu-item.active { background:#0b58d0; color:#fff; }
-.admin-profile { margin-top:auto; display:flex; gap:10px; align-items:center; padding:10px; border-radius:8px; border:1px solid #eef2f7; background:#fff; }
-.admin-icon { width:44px; height:44px; border-radius:50%; object-fit:cover; border:1px solid #eef2f7; }
-.admin-name { font-weight:700; font-size:14px; }
+
+.admin-profile {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+}
 .small.muted { color:#6b7280; font-size:12px; }
 
 /* main area */

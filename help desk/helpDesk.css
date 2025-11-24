@@ -7,7 +7,7 @@ body { background:#f6f8fb; color:#111; }
 .layout { display:flex; min-height:100vh; }
 
 /* sidebar */
-/* Sidebar */
+/* Sidebar *//* Sidebar */
 .sidebar {
   width: 240px;
   background: white;
@@ -42,7 +42,7 @@ body { background:#f6f8fb; color:#111; }
   background: #e6ecff;
   color: #0033cc;
 }
-.menu-item.active { background:#0b58d0; color:#fff; }
+
 .admin-profile {
   margin-top: 20px;
   padding: 10px;
@@ -50,15 +50,6 @@ body { background:#f6f8fb; color:#111; }
   border-radius: 6px;
   text-align: center;
   font-size: 14px;
-}
-.admin-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 8px;
-  vertical-align: middle;
-  background-color: #ffffff;
 }
 /* main area */
 .main { flex:1; padding:20px 28px; }
