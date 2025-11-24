@@ -37,8 +37,7 @@ body { background:#f6f8fb; color:#111; }
   color: #333;
 }
 
-.menu-item.active,
-.menu-item:hover {
+.menu-item.active {
   background: #e6ecff;
   color: #0033cc;
 }

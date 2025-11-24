@@ -1,0 +1,85 @@
+/* settings.css - white themed settings page, matches other admin pages */
+
+/* base */
+* { box-sizing:border-box; margin:0; padding:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+body { background:#f6f8fb; color:#0f1724; -webkit-font-smoothing:antialiased; }
+
+/* layout */
+.layout { display:flex; min-height:100vh; }
+.sidebar {
+  width:260px;
+  background:#fff;
+  border-right:1px solid #eef2f7;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.brand { font-weight:800; font-size:18px; color:#0b3a66; }
+.brand .b { background:#fde68a; padding:2px 6px; border-radius:4px; margin-left:6px; }
+
+.menu { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+.menu-item { color:#374151; padding:10px 12px; border-radius:8px; text-decoration:none; display:block; }
+.menu-item:hover { background:#f1f5f9; color:#0b58d0; }
+.menu-item.active { background:#0b58d0; color:#fff; }
+
+.admin-profile { margin-top:auto; display:flex; gap:10px; align-items:center; padding:10px; border-radius:8px; border:1px solid #eef2f7; background:#fff; }
+.admin-icon { width:44px; height:44px; border-radius:50%; object-fit:cover; border:1px solid #eef2f7; }
+.admin-name { font-weight:700; font-size:14px; }
+.small.muted { color:#6b7280; font-size:12px; }
+
+/* main area */
+.main { flex:1; padding:20px 28px; }
+.topbar h1 { font-size:22px; margin-bottom:2px; }
+.muted { color:#6b7280; }
+.page-body { margin-top:18px; display:flex; flex-direction:column; gap:16px; }
+
+/* cards */
+.card { background:#fff; border-radius:12px; padding:18px; border:1px solid #eef2f7; box-shadow: 0 8px 20px rgba(3,10,25,0.03); }
+.card-header h2 { margin:0 0 10px 0; font-size:16px; color:#0b3a66; }
+
+/* grid helpers */
+.grid-2 { display:grid; grid-template-columns: 1fr 420px; gap:18px; align-items:start; }
+.grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; align-items:center; }
+
+/* small card inside */
+.small-card { background:#fbfdff; border-radius:10px; padding:12px; border:1px solid #eef4fa; }
+
+/* labels and inputs */
+.subheading { margin:0 0 8px 0; font-weight:700; color:#111827; }
+.label { display:block; font-weight:700; color:#374151; margin-bottom:6px; }
+.input { width:100%; padding:10px 12px; border-radius:8px; border:1px solid #eef2f7; background:#fff; font-size:14px; }
+.input.small-input { padding:8px 10px; width:100%; }
+.actions-row { display:flex; gap:12px; }
+
+/* buttons */
+.btn-primary {
+  background: linear-gradient(180deg,#0b58d0,#0056b3);
+  color:#fff; padding:10px 14px; border-radius:8px; border:none; cursor:pointer; font-weight:700;
+  box-shadow: 0 8px 28px rgba(11,88,208,0.12);
+}
+.btn-ghost { padding:8px 12px; border-radius:8px; border:1px solid #eef2f7; background:#fff; color:#374151; cursor:pointer; }
+
+/* switch (2FA) */
+.switch { position: relative; display: inline-block; width:54px; height:30px; }
+.switch input { opacity:0; width:0; height:0; }
+.slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:#e6ecf8; border-radius:34px; transition:.2s; border:1px solid #dbe8ff; }
+.slider:before { position:absolute; content:""; height:22px; width:22px; left:4px; bottom:4px; background:white; border-radius:50%; transition:.2s; box-shadow:0 4px 12px rgba(3,10,25,0.08); }
+.switch input:checked + .slider { background: linear-gradient(180deg,#8ee7ce,#06b075); border-color: rgba(6,176,117,0.2); }
+.switch input:checked + .slider:before { transform: translateX(24px); }
+
+/* pills for status */
+.pill-sent { display:inline-block; padding:8px 12px; border-radius:999px; background:#ecfdf5; color:#065f46; border:1px solid #bbf7d0; font-weight:700; }
+.pill-scheduled { display:inline-block; padding:8px 12px; border-radius:999px; background:#eef2ff; color:#0b58d0; border:1px solid #dbeafe; font-weight:700; }
+
+/* helper sizes */
+.small { font-size:13px; color:#6b7280; }
+
+/* responsive */
+@media (max-width:1100px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: repeat(1, 1fr); }
+  .sidebar { display:none; }
+  .layout { display:block; }
+  .main { padding:18px; }
+}

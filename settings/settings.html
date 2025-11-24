@@ -1,11 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bus Sathi | System Settings</title>
+  <link rel="stylesheet" href="settings.css" />
 </head>
 <body>
-    
+  <div class="layout">
+    <!-- Sidebar (consistent with other pages) -->
+    <aside class="sidebar">
+      <div class="brand">LOC <span class="b">B</span> BUS</div>
+
+      <nav class="menu">
+        <a class="menu-item active" href="/Admin-Site/index.html">Dashboard</a>
+  <a class="menu-item" href="/Admin-Site/live-map.html">Live Map</a>
+  <a class="menu-item" href="/Admin-Site/fleet/fleet.html">Fleet Management</a>
+  <a class="menu-item" href="/Admin-Site/broadCasts/broadCasts.html">Broadcasts</a>
+  <a class="menu-item" href="/Admin-Site/notifications.html">Notifications</a>
+  <a class="menu-item" href="/Admin-Site/help desk/helpDesk.html">Help Desk</a>
+  <a class="menu-item active" href="/Admin-Site/settings.html">Settings</a>
+      </nav>
+
+      <div class="admin-profile">
+        <!-- using uploaded image for avatar/visual (local path) -->
+        <img src="/mnt/data/settings.jpg" alt="admin" class="admin-icon" />
+        <div class="admin-name">Admin User<br><span class="small muted">Super Admin</span></div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <header class="topbar">
+        <h1>System Settings</h1>
+        <p class="muted small">Configure admin preferences and system behavior</p>
+      </header>
+
+      <section class="page-body">
+        <!-- Admin Profile & Security -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Admin Profile & Security</h2>
+          </div>
+
+          <div class="grid-2">
+            <!-- left: change password -->
+            <div>
+              <h3 class="subheading">Change Password</h3>
+              <label class="label">Current Password</label>
+              <input type="password" id="currentPassword" class="input" placeholder="Enter current password" />
+
+              <label class="label">New Password</label>
+              <input type="password" id="newPassword" class="input" placeholder="Enter new password" />
+
+              <label class="label">Confirm New Password</label>
+              <input type="password" id="confirmPassword" class="input" placeholder="Confirm new password" />
+
+              <div class="actions-row" style="margin-top:12px;">
+                <button id="updatePasswordBtn" class="btn-primary">Update Password</button>
+                <button id="resetPwdDemo" class="btn-ghost">Reset (demo)</button>
+              </div>
+              <div id="pwdMsg" class="small muted" style="margin-top:8px;"></div>
+            </div>
+
+            <!-- right: 2FA -->
+            <div>
+              <h3 class="subheading">Two-Factor Authentication (2FA)</h3>
+              <div class="card small-card">
+                <p class="muted">Secure your account with an extra layer of security using your mobile device.</p>
+                <div class="two-col" style="margin-top:12px; align-items:center;">
+                  <div>
+                    <div class="muted">2FA Status</div>
+                    <div id="twofaStatus" class="pill-sent" style="margin-top:8px;">Enabled</div>
+                  </div>
+                  <div style="margin-left:auto;">
+                    <label class="switch">
+                      <input id="twofaToggle" type="checkbox" checked />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fleet Thresholds & Alerts -->
+        <div class="card">
+          <div class="card-header"><h2>Fleet Thresholds & Alerts</h2></div>
+          <div class="grid-3">
+            <div class="threshold">
+              <label class="label">Max Speed Alert Threshold</label>
+              <input id="maxSpeed" class="input small-input" type="number" value="80" />
+              <div class="muted small">km/h</div>
+            </div>
+
+            <div class="threshold">
+              <label class="label">Schedule Delay Tolerance</label>
+              <input id="delayTol" class="input small-input" type="number" value="15" />
+              <div class="muted small">minutes</div>
+            </div>
+
+            <div class="threshold">
+              <label class="label">Geofence Deviation Tolerance</label>
+              <input id="geofenceTol" class="input small-input" type="number" value="100" />
+              <div class="muted small">meters</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Performance & Data -->
+        <div class="card">
+          <div class="card-header"><h2>System Performance & Data</h2></div>
+          <div class="grid-3">
+            <div>
+              <label class="label">GPS Update Frequency</label>
+              <select id="gpsFreq" class="input">
+                <option>Every 10 Seconds</option>
+                <option>Every 30 Seconds</option>
+                <option>Every 1 Minute</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="label">Data Log Retention</label>
+              <select id="dataRetention" class="input">
+                <option>Keep for 30 Days</option>
+                <option selected>Keep for 90 Days</option>
+                <option>Keep for 180 Days</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="label">Minimum Conductor App Version</label>
+              <input id="minAppVersion" class="input" value="v2.5.1" />
+              <div class="muted small">Forces older apps to update</div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; margin-top:18px;">
+            <button id="saveSystemBtn" class="btn-primary">Save System Configuration</button>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <script src="settings.js"></script>
 </body>
 </html>
