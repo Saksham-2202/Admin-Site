@@ -6,15 +6,38 @@ body { background:#f6f8fb; color:#111; }
 /* layout */
 .layout { display:flex; min-height:100vh; }
 .sidebar {
-  width:220px; background:#fff; padding:22px 14px; border-right:1px solid #eef2f7;
-  display:flex; flex-direction:column; gap:12px;
+  width: 240px;
+  background: white;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #dcdcdc;
+  margin: 18px;
+  border-radius: 12px;
 }
 .brand { font-weight:800; font-size:18px; color:#0b3a66; margin-bottom:6px; }
-.menu { display:flex; flex-direction:column; gap:8px; }
-.menu-item { color:#374151; padding:10px 12px; border-radius:8px; text-decoration:none; display:block; }
-.menu-item:hover { background:#f1f5f9; color:#0b58d0; }
-.menu-item.active { background:#0b58d0; color:#fff; }
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: auto;
+}
 
+.menu-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  color: #333;
+}
+
+.menu-item.active,
+.menu-item:hover {
+  background: #e6ecff;
+  color: #0033cc;
+}
+.menu-item.active { background:#0b58d0; color:#fff; }
 .admin-profile { margin-top:auto; display:flex; align-items:center; gap:10px; padding:8px; border:1px solid #eef2f7; border-radius:8px; background:#fff; }
 .admin-icon { width:36px; height:36px; border-radius:50%; object-fit:cover; }
 

@@ -24,6 +24,7 @@ body { background:#f1f4f7; color:#222; }
   gap: 12px;
   margin-bottom: auto;
 }
+
 .menu-item {
   padding: 10px 12px;
   border-radius: 8px;
@@ -32,7 +33,12 @@ body { background:#f1f4f7; color:#222; }
   text-decoration: none;
   color: #333;
 }
-.menu-item:hover { background:#f0f6ff; color:#0b58d0; }
+
+.menu-item.active,
+.menu-item:hover {
+  background: #e6ecff;
+  color: #0033cc;
+}
 .menu-item.active { background:#0b58d0; color:#fff; }
 .admin-profile { margin-top:auto; display:flex; align-items:center; gap:10px; background:#fafbfd; padding:10px; border-radius:10px; }
 .admin-icon { width:36px; height:36px; border-radius:50%; object-fit:cover; }

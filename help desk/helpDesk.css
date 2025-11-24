@@ -37,11 +37,12 @@ body { background:#f6f8fb; color:#111; }
   color: #333;
 }
 
-.menu-item.active {
+.menu-item.active,
+.menu-item:hover {
   background: #e6ecff;
   color: #0033cc;
 }
-
+.menu-item.active { background:#0b58d0; color:#fff; }
 .admin-profile {
   margin-top: 20px;
   padding: 10px;
