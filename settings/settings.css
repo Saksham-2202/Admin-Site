@@ -50,6 +50,15 @@ body { background:#f6f8fb; color:#0f1724; -webkit-font-smoothing:antialiased; }
   text-align: center;
   font-size: 14px;
 }
+.admin-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  vertical-align: middle;
+  background-color: #ffffff;
+}
 .small.muted { color:#6b7280; font-size:12px; }
 
 /* main area */
