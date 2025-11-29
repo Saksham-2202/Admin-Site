@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Live Map — Leaflet OSM Test</title>
+
+  <!-- Leaflet CSS & JS (simple CDN links, no integrity) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    html,body,#map { height:100%; margin:0; padding:0; }
+    body { font-family: Arial, sans-serif; }
+    .controls { position:absolute; left:10px; top:10px; z-index:1000; background:white; padding:8px; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.12);}
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="controls">
+    <button id="simulate">Simulate</button>
+  </div>
+
+  <script>
+    // Basic sanity checks
+    if (typeof L === 'undefined') {
+      console.error('Leaflet did not load. Check your internet/ CDN or the script tag.');
+      document.body.insertAdjacentHTML('beforeend', '<div style="position:absolute;bottom:10px;left:10px;background:#fee;padding:8px;border-radius:6px;">Leaflet failed to load — open console for details.</div>');
+      throw new Error('Leaflet not loaded');
+    }
+
+    // Create map (centered on New Delhi)
+    const map = L.map('map').setView([28.6139, 77.2090], 12);
+
+    // OSM tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Simple simulator that adds 3 markers and moves them
+    const buses = {};
+    function addOrUpdate(id, lat, lng) {
+      if (!buses[id]) {
+        buses[id] = L.marker([lat, lng]).addTo(map).bindPopup(id);
+      } else {
+        buses[id].setLatLng([lat, lng]);
+      }
+    }
+
+    let simInterval;
+    document.getElementById('simulate').addEventListener('click', () => {
+      if (simInterval) { clearInterval(simInterval); simInterval = null; document.getElementById('simulate').innerText='Simulate'; return; }
+      document.getElementById('simulate').innerText='Stop Sim';
+      // initial positions
+      addOrUpdate('BUS-101', 28.6139, 77.2090);
+      addOrUpdate('BUS-102', 28.62, 77.20);
+      addOrUpdate('BUS-103', 28.60, 77.22);
+      simInterval = setInterval(() => {
+        Object.keys(buses).forEach(id => {
+          const cur = buses[id].getLatLng();
+          const newLat = cur.lat + (Math.random()-0.5)*0.002;
+          const newLng = cur.lng + (Math.random()-0.5)*0.002;
+          buses[id].setLatLng([newLat, newLng]);
+        });
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
