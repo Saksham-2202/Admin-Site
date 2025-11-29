@@ -3,67 +3,193 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Live Map — Leaflet OSM Test</title>
+  <title>Live Map — Admin (Working)</title>
 
-  <!-- Leaflet CSS & JS (simple CDN links, no integrity) -->
+  <!-- Leaflet CSS & JS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <style>
-    html,body,#map { height:100%; margin:0; padding:0; }
-    body { font-family: Arial, sans-serif; }
-    .controls { position:absolute; left:10px; top:10px; z-index:1000; background:white; padding:8px; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.12);}
-  </style>
+  <link rel="stylesheet" href="live-map.css" />
 </head>
 <body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand">LOC🅱️BUS</div>
+    </div>
+
+    <nav class="menu">
+    <a class="menu-item " href="/Admin-Site/index.html">Dashboard</a>
+    <a class="menu-item active" href="/Admin-Site/live-map/live-map.html">Live Map</a>
+  <a class="menu-item" href="/Admin-Site/fleet/fleet.html">Fleet Management</a>
+  <a class="menu-item " href="/Admin-Site/broadCasts/broadCasts.html">Broadcasts</a>
+  <a class="menu-item" href="/Admin-Site/notifications/notifications.html">Notifications</a>
+  <a class="menu-item" href="/Admin-Site/help desk/helpDesk.html">Help Desk</a>
+  <a class="menu-item" href="/Admin-Site/settings/settings.html">Settings</a>
+</nav>
+    <div class="controls">
+      <button id="fitAll" class="btn">Fit All</button>
+      <button id="simulate" class="btn">Simulate</button>
+    </div>
+
+    <div class="bus-list" id="list"><!-- bus items injected --></div>
+
+    
+  </aside>
+<div class="admin-profile">
+        <img src="admin img.png" class="admin-icon" />
+        ADMIN_33
+      </div>
   <div id="map"></div>
-  <div class="controls">
-    <button id="simulate">Simulate</button>
-  </div>
 
   <script>
-    // Basic sanity checks
+    // Basic Leaflet load check
     if (typeof L === 'undefined') {
-      console.error('Leaflet did not load. Check your internet/ CDN or the script tag.');
-      document.body.insertAdjacentHTML('beforeend', '<div style="position:absolute;bottom:10px;left:10px;background:#fee;padding:8px;border-radius:6px;">Leaflet failed to load — open console for details.</div>');
+      document.body.innerHTML = '<div style="padding:20px;">Leaflet failed to load. Check your internet or CDN.</div>';
       throw new Error('Leaflet not loaded');
     }
 
-    // Create map (centered on New Delhi)
-    const map = L.map('map').setView([28.6139, 77.2090], 12);
+    // Create map centered on New Delhi
+    const map = L.map('map', { zoomControl: true }).setView([28.6139, 77.2090], 12);
 
-    // OSM tiles
+    // OSM tiles (free)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Simple simulator that adds 3 markers and moves them
-    const buses = {};
-    function addOrUpdate(id, lat, lng) {
-      if (!buses[id]) {
-        buses[id] = L.marker([lat, lng]).addTo(map).bindPopup(id);
+    // keep buses in a Map
+    const buses = new Map();
+
+    // safe escapeHtml
+    function escapeHtml(str){
+      if (str === undefined || str === null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // make a DivIcon for a bus
+    function makeIcon(data){
+      const status = (data.status || '').toLowerCase();
+      const cls = status === 'idle' ? 'marker-idle' : (status === 'delayed' ? 'marker-delayed' : 'marker-running');
+      const content = '<div class="bus-marker ' + cls + '">' + escapeHtml(data.number || 'BUS') + '</div>';
+      return L.divIcon({ html: content, className: '', iconSize: [48, 28], iconAnchor: [24, 14] });
+    }
+
+    // add or update bus marker
+    function upsertBus(id, data) {
+      if (typeof data.lat !== 'number' || typeof data.lng !== 'number') return;
+      const existing = buses.get(id);
+      if (!existing) {
+        const marker = L.marker([data.lat, data.lng], { icon: makeIcon(data) }).addTo(map);
+        marker.on('click', () => showDetails(id));
+        buses.set(id, { marker: marker, data: Object.assign({}, data) });
+        addListItem(id, data);
       } else {
-        buses[id].setLatLng([lat, lng]);
+        const from = existing.data;
+        const to = Object.assign({}, existing.data, data);
+        existing.data = to;
+        if (from.status !== to.status || from.number !== to.number) {
+          existing.marker.setIcon(makeIcon(to));
+        }
+        animateMarker(existing.marker, [from.lat, from.lng], [to.lat, to.lng]);
+        updateListItem(id, to);
       }
     }
 
-    let simInterval;
-    document.getElementById('simulate').addEventListener('click', () => {
-      if (simInterval) { clearInterval(simInterval); simInterval = null; document.getElementById('simulate').innerText='Simulate'; return; }
-      document.getElementById('simulate').innerText='Stop Sim';
-      // initial positions
-      addOrUpdate('BUS-101', 28.6139, 77.2090);
-      addOrUpdate('BUS-102', 28.62, 77.20);
-      addOrUpdate('BUS-103', 28.60, 77.22);
-      simInterval = setInterval(() => {
-        Object.keys(buses).forEach(id => {
-          const cur = buses[id].getLatLng();
-          const newLat = cur.lat + (Math.random()-0.5)*0.002;
-          const newLng = cur.lng + (Math.random()-0.5)*0.002;
-          buses[id].setLatLng([newLat, newLng]);
+    // animate between two latlngs (simple easing)
+    function animateMarker(marker, fromLatLng, toLatLng, duration = 1000) {
+      const start = performance.now();
+      function step(now){
+        const t = Math.min(1, (now - start) / duration);
+        const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2*t) * t;
+        const lat = fromLatLng[0] + (toLatLng[0] - fromLatLng[0]) * eased;
+        const lng = fromLatLng[1] + (toLatLng[1] - fromLatLng[1]) * eased;
+        marker.setLatLng([lat, lng]);
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // sidebar helpers
+    const listEl = document.getElementById('list');
+
+    function addListItem(id, data){
+      const el = document.createElement('div');
+      el.id = 'bus-' + id;
+      el.className = 'bus-card';
+      el.innerHTML = ''
+        + '<div style="width:10px;height:10px;background:' + statusColor(data.status) + ';border-radius:50%"></div>'
+        + '<div class="bus-info"><div>' + escapeHtml(data.number || id) + '</div>'
+        + '<div class="bus-sub">' + escapeHtml(data.route || 'Route not set') + '</div></div>'
+        + '<div style="font-weight:700">' + formatSpeed(data.speed) + '</div>';
+      el.addEventListener('click', function(){
+        const entry = buses.get(id);
+        if (entry) map.flyTo([entry.data.lat, entry.data.lng], 15);
+      });
+      listEl.appendChild(el);
+    }
+
+    function updateListItem(id, data){
+      const el = document.getElementById('bus-' + id);
+      if (!el) return;
+      el.innerHTML = ''
+        + '<div style="width:10px;height:10px;background:' + statusColor(data.status) + ';border-radius:50%"></div>'
+        + '<div class="bus-info"><div>' + escapeHtml(data.number || id) + '</div>'
+        + '<div class="bus-sub">' + escapeHtml(data.route || 'Route not set') + '</div></div>'
+        + '<div style="font-weight:700">' + formatSpeed(data.speed) + '</div>';
+    }
+
+    function statusColor(s){
+      switch ((s || '').toLowerCase()){
+        case 'running': return '#10b981';
+        case 'idle': return '#f59e0b';
+        case 'delayed': return '#ef4444';
+        default: return '#9ca3af';
+      }
+    }
+    function formatSpeed(v){ return v == null ? '-' : Math.round(v) + ' km/h'; }
+
+    function showDetails(id){
+      const d = buses.get(id).data;
+      alert('Bus ' + (d.number || id) + '\nRoute: ' + (d.route || '-') + '\nSpeed: ' + formatSpeed(d.speed) + '\nLast updated: ' + new Date(d.ts || Date.now()).toLocaleString());
+    }
+
+    // Fit All button
+    document.getElementById('fitAll').addEventListener('click', function(){
+      const coords = [];
+      buses.forEach(function(v){ coords.push([v.data.lat, v.data.lng]); });
+      if (coords.length === 0) return;
+      const bounds = L.latLngBounds(coords);
+      map.fitBounds(bounds.pad(0.15));
+    });
+
+    // Simulator (no Firebase required)
+    let simInterval = null;
+    document.getElementById('simulate').addEventListener('click', function(){
+      if (simInterval) {
+        clearInterval(simInterval);
+        simInterval = null;
+        this.innerText = 'Simulate';
+        return;
+      }
+      this.innerText = 'Stop Sim';
+      // initial buses
+      upsertBus('bus1', { number: 'BUS-101', route: 'R1', lat: 28.6139, lng: 77.2090, speed: 30, status: 'running', ts: Date.now() });
+      upsertBus('bus2', { number: 'BUS-102', route: 'R2', lat: 28.62, lng: 77.20, speed: 25, status: 'running', ts: Date.now() });
+      upsertBus('bus3', { number: 'BUS-103', route: 'R3', lat: 28.60, lng: 77.22, speed: 0, status: 'idle', ts: Date.now() });
+
+      simInterval = setInterval(function(){
+        buses.forEach(function(v, id){
+          const jitter = (Math.random() - 0.5) * 0.0016;
+          const newLat = v.data.lat + (Math.random() * 0.002 - 0.001) + jitter;
+          const newLng = v.data.lng + (Math.random() * 0.002 - 0.001) + jitter;
+          const newSpeed = Math.max(0, (v.data.speed || 20) + (Math.random() * 6 - 3));
+          upsertBus(id, { lat: newLat, lng: newLng, speed: newSpeed, status: newSpeed < 1 ? 'idle' : 'running', ts: Date.now(), number: v.data.number, route: v.data.route });
         });
-      }, 1500);
+      }, 1600);
     });
   </script>
 </body>
